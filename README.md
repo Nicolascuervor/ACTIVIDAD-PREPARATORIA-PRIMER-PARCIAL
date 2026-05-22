@@ -56,6 +56,26 @@ A continuación, se presentan los casos de prueba diseñados con base en el aná
 | **CP11** | REQ4 - No duplicar nota | Registrar notas para la misma materia en semestres diferentes | El estudiante ya tiene registrada la materia Matemáticas en 2023-1 | Materia = Matemáticas, Semestre = 2023-2, Nota = 4.5 | 1. Registrar nota para Matemáticas en 2023-2. | La nota se registra exitosamente (materias repetidas en distinto semestre) | Positivo |
 | **CP12** | REQ4 - No duplicar nota | Registrar notas para materias diferentes en el mismo semestre | El estudiante ya tiene registrada la materia Matemáticas en 2023-1 | Materia = Física, Semestre = 2023-1, Nota = 3.5 | 1. Registrar nota para Física en 2023-1. | La nota se registra exitosamente (son materias distintas) | Positivo |
 
+## Cobertura de Pruebas (PARTE 3)
+
+Se implementaron los requerimientos utilizando la metodología TDD (Red-Green-Refactor). La cobertura de código obtenida superó el umbral requerido (85%). A continuación, se presenta el reporte de cobertura final:
+
+```text
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.14.0-final-0 _______________
+
+Name                      Stmts   Miss  Cover   Missing
+-------------------------------------------------------
+src\__init__.py               0      0   100%
+src\exceptions.py             4      0   100%
+src\models.py                 0      0   100%
+src\sistema_de_notas.py      23      1    96%   25
+-------------------------------------------------------
+TOTAL                        27      1    96%
+============================= 12 passed in 0.11s ==============================
+```
+
+
 
 
 
