@@ -22,15 +22,14 @@ class SistemaDeNotas:
 
     def calcular_promedio(self, estudiante: str) -> float:
         notas_estudiante = self.notas.get(estudiante, {})
-        todas_las_notas = []
-        for semestres in notas_estudiante.values():
-            for nota in semestres.values():
-                todas_las_notas.append(nota)
+        todas_las_notas = [
+            nota 
+            for semestres in notas_estudiante.values() 
+            for nota in semestres.values()
+        ]
         
-        if not todas_las_notas:
-            return 0.0
-            
-        return sum(todas_las_notas) / len(todas_las_notas)
+        return sum(todas_las_notas) / len(todas_las_notas) if todas_las_notas else 0.0
+
 
 
 
