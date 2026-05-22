@@ -37,4 +37,27 @@ Esto lo pregunto ya que directamente Impacta el diseño de casos de prueba porqu
 
 Esto es debido al impacto en los casos de prueba para el cálculo del promedio. Ya que definen si debo probar que el promedio suma ambas notas, la pérdida y la repetida o si la nota nueva reemplaza a la antigua en el cómputo final del promedio histórico del estudiante.
 
+## Diseño formal de casos de prueba (PARTE 2)
+
+A continuación, se presentan los casos de prueba diseñados con base en el análisis previo.
+
+| ID | Requerimiento | Descripción | Precondición | Datos de entrada | Pasos | Resultado esperado | Tipo |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CP01** | REQ1 - Nota entre 0.0 y 5.0 | Registrar una nota válida dentro del rango (Partición Válida) | Estudiante y materia existen en el sistema | Nota = 4.0 | 1. Seleccionar estudiante y materia. 2. Ingresar la nota 4.0. 3. Guardar el registro. | La nota se registra exitosamente en el sistema | Positivo |
+| **CP02** | REQ1 - Nota entre 0.0 y 5.0 | Intentar registrar una nota superior al límite máximo (Partición Inválida) | Estudiante y materia existen en el sistema | Nota = 6.0 | 1. Seleccionar estudiante y materia. 2. Ingresar la nota 6.0. 3. Guardar el registro. | El sistema rechaza el ingreso y lanza un error indicando que la nota es inválida | Negativo |
+| **CP03** | REQ1 - Nota entre 0.0 y 5.0 | Registrar una nota en el límite exacto inferior (Valor Límite) | Estudiante y materia existen en el sistema | Nota = 0.0 | 1. Seleccionar estudiante y materia. 2. Ingresar la nota 0.0. 3. Guardar el registro. | La nota se registra exitosamente | Borde |
+| **CP04** | REQ2 - Aprobar/Reprobar | Registrar nota en el límite exacto de aprobación | Estudiante y materia existen en el sistema | Nota = 3.0 | 1. Ingresar nota 3.0. 2. Consultar estado de la materia para el estudiante. | El sistema registra la nota y determina que el estudiante **aprueba** la materia | Borde |
+| **CP05** | REQ2 - Aprobar/Reprobar | Registrar nota justo por debajo del límite de aprobación | Estudiante y materia existen en el sistema | Nota = 2.9 | 1. Ingresar nota 2.9. 2. Consultar estado de la materia para el estudiante. | El sistema registra la nota y determina que el estudiante **reprueba** la materia | Borde |
+| **CP06** | REQ2 - Aprobar/Reprobar | Registrar nota por encima del límite de aprobación | Estudiante y materia existen en el sistema | Nota = 4.2 | 1. Ingresar nota 4.2. 2. Consultar estado de la materia para el estudiante. | El sistema registra la nota y determina que el estudiante **aprueba** la materia | Positivo |
+| **CP07** | REQ3 - Calcular promedio | Calcular promedio de un estudiante sin notas registradas | El estudiante existe pero no tiene notas en el sistema | Ninguno | 1. Solicitar el cálculo del promedio para el estudiante. | El sistema retorna 0.0 (sin fallar por división entre cero) | Borde |
+| **CP08** | REQ3 - Calcular promedio | Calcular promedio con una sola nota registrada | El estudiante tiene exactamente 1 nota registrada | Nota = 4.5 (Física) | 1. Solicitar el cálculo del promedio para el estudiante. | El sistema retorna exactamente 4.5 como promedio | Positivo |
+| **CP09** | REQ3 - Calcular promedio | Calcular promedio con múltiples notas | El estudiante tiene 3 notas registradas | Notas: Mat(3.0), Fis(4.0), Quim(5.0) | 1. Solicitar el cálculo del promedio para el estudiante. | El sistema retorna 4.0 como promedio | Positivo |
+| **CP10** | REQ4 - No duplicar nota | Registrar dos notas para la misma materia en el mismo semestre | El estudiante ya tiene registrada la materia Matemáticas en el semestre 2023-1 | Materia = Matemáticas, Semestre = 2023-1, Nota = 4.0 | 1. Intentar registrar una segunda nota para Matemáticas en 2023-1. | El sistema bloquea el registro y lanza un error claro de duplicidad | Negativo |
+| **CP11** | REQ4 - No duplicar nota | Registrar notas para la misma materia en semestres diferentes | El estudiante ya tiene registrada la materia Matemáticas en 2023-1 | Materia = Matemáticas, Semestre = 2023-2, Nota = 4.5 | 1. Registrar nota para Matemáticas en 2023-2. | La nota se registra exitosamente (materias repetidas en distinto semestre) | Positivo |
+| **CP12** | REQ4 - No duplicar nota | Registrar notas para materias diferentes en el mismo semestre | El estudiante ya tiene registrada la materia Matemáticas en 2023-1 | Materia = Física, Semestre = 2023-1, Nota = 3.5 | 1. Registrar nota para Física en 2023-1. | La nota se registra exitosamente (son materias distintas) | Positivo |
+
+
+
+
+
 
