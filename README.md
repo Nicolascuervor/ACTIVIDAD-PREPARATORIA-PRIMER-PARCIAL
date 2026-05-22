@@ -8,12 +8,12 @@ Para el requerimiento "La nota debe estar entre 0.0 y 5.0", identificamos las si
 
 | Nombre de la Partición | Rango | Valor Representativo | Resultado Esperado |
 | :--- | :--- | :--- | :--- |
-| **INVÁLIDA (Negativa)** | `(-∞, 0.0)` | `-1.0` | Lanzar error (Nota inválida) |
-| **VÁLIDA (Reprobado)** | `[0.0, 2.9]` | `2.5` | Registrar nota, el estudiante reprueba la materia |
-| **VÁLIDA (Deficiente)** | `[3.0, 3.5]` | `3.2` | Registrar nota, resultado deficiente pero aprueba |
-| **VÁLIDA (Debe Mejorar)** | `[3.6, 4.5]` | `4.0` | Registrar nota, resultado aceptable |
-| **VÁLIDA (Aprobado)** | `[4.6, 5.0]` | `4.8` | Registrar nota, aprueba exitosamente |
-| **INVÁLIDA (Exceso)** | `(5.0, ∞)` | `6.0` | Lanzar error (Nota inválida) |
+| Valor negativo | `( menor a 0 , 0.0)` | `-1.0` | Se lanza un error debido a que la nota es inválida |
+| El estudiante reprobó | `[0.0, 2.9]` | `2.5` | Registrar nota y el estudiante reprueba la materia |
+| Deficiente | `[3.0, 3.5]` | `3.2` | Registrar nota y resultado deficiente pero aprueba |
+| Debe Mejorar | `[3.6, 4.5]` | `4.0` | Registrar nota y resultado aceptable |
+| Aprobado | `[4.6, 5.0]` | `4.8` | Registrar nota, aprueba exitosamente |
+| Exceso | `(5.0, ∞)` | `6.0` | Se lanza un error debido a que la nota es inválida y sobrepasa los límites establecidos |
 
 ### 1.2 — Análisis de Valores Límite
 
@@ -27,12 +27,14 @@ A continuación, los valores críticos en cada borde de los rangos definidos (0.
 
 ### 1.3 — Preguntas al Product Owner
 
-Respecto al requerimiento *"No se puede registrar dos notas para la misma materia en el mismo semestre. Si se intenta, el sistema debe lanzar un error claro"*, surgen estas preguntas:
+Respecto al requerimiento mencionado de  "No se puede registrar dos notas para la misma materia en el mismo semestre. Si se intenta, el sistema debe lanzar un error claro y sugerente", surgen estas preguntas:
 
-1. **¿Se debe permitir la corrección de una nota ya ingresada en el mismo semestre si un profesor comete un error de digitación?**
-   * **Justificación:** Impacta el diseño de casos de prueba porque define si debo probar un mecanismo de *actualización/sobrescritura* de nota (ej. `actualizar_nota()`) o si el error de duplicidad es un bloqueo absoluto de inserciones adicionales, obligando a diseñar casos de prueba donde cualquier segundo intento siempre falle.
+¿Se debe permitir o debe ser posible la corrección de una nota ya ingresada en el mismo semestre si un profesor comete un error de digitación?
 
-2. **¿Qué sucede con el promedio acumulado si un estudiante pierde la materia y la repite en un semestre posterior (ej. misma materia, distinto semestre)?**
-   * **Justificación:** Impacta los casos de prueba para el cálculo del promedio. Define si debo probar que el promedio suma ambas notas (la perdida y la repetida) o si la nota nueva reemplaza a la antigua en el cómputo final del promedio histórico del estudiante.
+Esto lo pregunto ya que directamente Impacta el diseño de casos de prueba porque define si debo probar un mecanismo de actualización/sobrescritura de nota o si el error de duplicidad es un bloqueo absoluto de inserciones adicionales, llevándome a diseñar casos de prueba donde cualquier segundo intento siempre falle.
+
+¿Qué pasará con el promedio acumulado si un estudiante pierde la materia y la repite en un semestre posterior, ejemplo una misma materia pero distinto semestre)? 
+
+Esto es debido al impacto en los casos de prueba para el cálculo del promedio. Ya que definen si debo probar que el promedio suma ambas notas, la pérdida y la repetida o si la nota nueva reemplaza a la antigua en el cómputo final del promedio histórico del estudiante.
 
 
