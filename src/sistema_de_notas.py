@@ -14,4 +14,11 @@ class SistemaDeNotas:
     def obtener_notas(self, estudiante: str) -> Dict[str, Dict[str, float]]:
         return self.notas[estudiante]
 
+    def materia_aprobada(self, estudiante: str, materia: str, semestre: str) -> bool:
+        nota = self.notas.get(estudiante, {}).get(materia, {}).get(semestre)
+        if nota is None:
+            raise ValueError("No se encontró nota para la materia en el semestre especificado")
+        return nota >= 3.0
+
+
 
