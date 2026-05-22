@@ -1,1 +1,2 @@
-# Custom exceptions
+class NotaInvalidaError(ValueError):
+    pass
