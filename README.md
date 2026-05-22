@@ -75,6 +75,15 @@ TOTAL                        27      1    96%
 ============================= 12 passed in 0.11s ==============================
 ```
 
+## Reflexión (PARTE 6)
+
+**¿Qué diferencia notaste entre diseñar los casos de prueba en la tabla antes de escribir código versus simplemente ponerte a programar directamente?**
+Diseñar los casos de prueba primero obliga a adoptar una mentalidad analítica orientada al producto (pensamiento de tester). Permite vislumbrar de antemano los escenarios borde, las precondiciones, y qué comportamientos son inválidos antes de escribir una sola línea lógica. Cuando uno se lanza a programar directamente, es fácil perder de vista los requerimientos de negocio u obviar caminos excepcionales, ya que la mente está ocupada resolviendo el "cómo" técnico en lugar del "qué" necesita el usuario. En resumen, la tabla funciona como un mapa que garantiza construir el software correcto.
+
+**¿Qué fue lo más difícil de seguir el ciclo TDD y en qué momento sentiste la tentación de saltarte algún paso?**
+Lo más complejo del ciclo TDD es desarrollar la disciplina de contención. Constantemente surge la tentación de escribir más código del estrictamente necesario para que pase la prueba actual (saltarse la regla del código mínimo en la fase GREEN) o de escribir la lógica y la prueba al mismo tiempo. Esto ocurrió particularmente en el Requerimiento 2 y 4, donde la implementación era tan breve (como un simple `if nota >= 3.0`) que el impulso natural es escribir el método completo sin antes haber visto fallar el test en la fase RED. Resistir esa tentación asegura una cobertura real y protege el código a futuro.
+
+
 
 
 
