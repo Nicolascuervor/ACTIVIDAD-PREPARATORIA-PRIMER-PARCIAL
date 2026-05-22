@@ -20,5 +20,18 @@ class SistemaDeNotas:
             raise ValueError("No se encontró nota para la materia en el semestre especificado")
         return nota >= 3.0
 
+    def calcular_promedio(self, estudiante: str) -> float:
+        notas_estudiante = self.notas.get(estudiante, {})
+        todas_las_notas = []
+        for semestres in notas_estudiante.values():
+            for nota in semestres.values():
+                todas_las_notas.append(nota)
+        
+        if not todas_las_notas:
+            return 0.0
+            
+        return sum(todas_las_notas) / len(todas_las_notas)
+
+
 
 
