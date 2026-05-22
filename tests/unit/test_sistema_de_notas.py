@@ -57,4 +57,34 @@ def test_calcular_promedio_multiples_notas():
     sistema.registrar_nota("estudiante_1", "Química", "2023-1", 5.0)
     assert sistema.calcular_promedio("estudiante_1") == 4.0
 
+def test_bloquear_nota_duplicada_mismo_semestre():
+    """CP10: Registrar dos notas para la misma materia en el mismo semestre (Negativo)"""
+    sistema = SistemaDeNotas()
+    sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 4.0)
+    from src.exceptions import NotaDuplicadaError
+    with pytest.raises(NotaDuplicadaError):
+        sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 4.5)
+
+def test_permitir_misma_materia_diferente_semestre():
+    """CP11: Registrar notas para la misma materia en semestres diferentes (Positivo)"""
+    sistema = SistemaDeNotas()
+    sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 4.0)
+    sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-2", 4.5)
+    notas = sistema.obtener_notas("estudiante_1")["Matemáticas"]
+    assert len(notas) == 2
+    assert notas["2023-1"] == 4.0
+    assert notas["2023-2"] == 4.5
+
+def test_permitir_diferente_materia_mismo_semestre():
+    """CP12: Registrar notas para materias diferentes en el mismo semestre (Positivo)"""
+    sistema = SistemaDeNotas()
+    sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 4.0)
+    sistema.registrar_nota("estudiante_1", "Física", "2023-1", 3.5)
+    notas = sistema.obtener_notas("estudiante_1")
+    assert "Matemáticas" in notas
+    assert "Física" in notas
+    assert notas["Matemáticas"]["2023-1"] == 4.0
+    assert notas["Física"]["2023-1"] == 3.5
+
+
 
