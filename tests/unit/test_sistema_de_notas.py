@@ -38,3 +38,23 @@ def test_aprobar_materia_holgadamente():
     sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 4.2)
     assert sistema.materia_aprobada("estudiante_1", "Matemáticas", "2023-1") is True
 
+def test_calcular_promedio_estudiante_sin_notas():
+    """CP07: Calcular promedio de un estudiante sin notas registradas (Borde)"""
+    sistema = SistemaDeNotas()
+    assert sistema.calcular_promedio("estudiante_nuevo") == 0.0
+
+def test_calcular_promedio_una_sola_nota():
+    """CP08: Calcular promedio con una sola nota registrada (Positivo)"""
+    sistema = SistemaDeNotas()
+    sistema.registrar_nota("estudiante_1", "Física", "2023-1", 4.5)
+    assert sistema.calcular_promedio("estudiante_1") == 4.5
+
+def test_calcular_promedio_multiples_notas():
+    """CP09: Calcular promedio con múltiples notas (Positivo)"""
+    sistema = SistemaDeNotas()
+    sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 3.0)
+    sistema.registrar_nota("estudiante_1", "Física", "2023-1", 4.0)
+    sistema.registrar_nota("estudiante_1", "Química", "2023-1", 5.0)
+    assert sistema.calcular_promedio("estudiante_1") == 4.0
+
+
