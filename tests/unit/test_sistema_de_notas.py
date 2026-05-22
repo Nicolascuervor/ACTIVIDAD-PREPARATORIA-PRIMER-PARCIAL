@@ -19,3 +19,22 @@ def test_registrar_nota_borde_inferior():
     sistema = SistemaDeNotas()
     sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 0.0)
     assert sistema.obtener_notas("estudiante_1")["Matemáticas"]["2023-1"] == 0.0
+
+def test_aprobar_materia_borde_exacto():
+    """CP04: Registrar nota en el límite exacto de aprobación (Borde)"""
+    sistema = SistemaDeNotas()
+    sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 3.0)
+    assert sistema.materia_aprobada("estudiante_1", "Matemáticas", "2023-1") is True
+
+def test_reprobar_materia_debajo_del_borde():
+    """CP05: Registrar nota justo por debajo del límite de aprobación (Borde)"""
+    sistema = SistemaDeNotas()
+    sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 2.9)
+    assert sistema.materia_aprobada("estudiante_1", "Matemáticas", "2023-1") is False
+
+def test_aprobar_materia_holgadamente():
+    """CP06: Registrar nota por encima del límite de aprobación (Positivo)"""
+    sistema = SistemaDeNotas()
+    sistema.registrar_nota("estudiante_1", "Matemáticas", "2023-1", 4.2)
+    assert sistema.materia_aprobada("estudiante_1", "Matemáticas", "2023-1") is True
+
